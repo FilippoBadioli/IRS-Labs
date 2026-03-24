@@ -55,6 +55,14 @@ Finally, a velocity scaling mechanism ensures that the wheel speeds do not excee
 
 This modular structure allows behaviours to be added or modified independently, improving flexibility compared to the finite state machine used in the previous lab.
 
+The controller-subsumption.lua file is organized with blocks of functions:
+
+1. The first block is for the robot base functions init, step, reset and destroy and the controller.
+2. The second block are sensor functions which return the values of specific sensors
+3. The third block is for function that return the state of each FSM
+4. The fourth block is the main body of every behaviour
+5. Lastly there is the function used to scale the velocity to not exceed the maximum admitted while still preserving left-right differences
+
 # TESTS EVALUATED AND RESULTS
 
 The controller was tested in different environments with various obstacle configurations, including both boxes and cylinders of different sizes and quantities.
