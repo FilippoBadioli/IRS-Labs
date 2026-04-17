@@ -42,10 +42,11 @@ def fitness(individual):
 # Selection: tournament
 # Randomly pick 2 individuals and return the one with the highest fitness
 def select_tournament(population,fitness_values):
-    random1 = random.random() * len(population)
-    random2 = random.random() * len(population)
+    random1 = random.randint(0, len(population) - 1)
+    random2 = random.randint(0, len(population) - 1)
     while random1 == random2:
-        random2 = random.random() * len(population)
+        random2 = random.randint(0, len(population) - 1)
+
     if fitness_values[random1] > fitness_values[random2]:
         return population[random1]
     else:
@@ -110,8 +111,8 @@ for gen in range(GENERATIONS):
     print_stats(population,fitness_values)
     new_population = []
     for _ in range(POP_SIZE):
-        parent1 = select_proportional(population,fitness_values)
-        parent2 = select_proportional(population,fitness_values)
+        parent1 = select_tournament(population,fitness_values)
+        parent2 = select_tournament(population,fitness_values)
         child = crossover(parent1, parent2)
         child = mutate(child)
         new_population.append(child)
