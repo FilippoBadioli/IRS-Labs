@@ -5,9 +5,9 @@ import os
 import subprocess
 
 GENOME_LENGTH = 50
-POP_SIZE = 20
+POP_SIZE = 10
 ELITE_SIZE = 5
-GENERATIONS = 15
+GENERATIONS = 5
 MUTATION_RATE = 0.1 # prob of mutating each gene
 CX_RATE = 0 # prob of applying crossover
 MUTATION_INTENSITY = 1 # stddev of a Gaussian distribution with mean 0
@@ -98,6 +98,7 @@ population = [create_individual() for _ in range(POP_SIZE)]
 # REPLACEMENT
 # for gen in range(GENERATIONS):
 #     fitness_values = [fitness(i) for i in population]
+#     print_stats(population,fitness_values)
 #     new_population = []
 #     for _ in range(POP_SIZE):
 #         parent1 = select_proportional(population,fitness_values)
@@ -106,18 +107,18 @@ population = [create_individual() for _ in range(POP_SIZE)]
 #         child = mutate(child)
 #         new_population.append(child)
 #     population = new_population
-#     print_stats(population,fitness_values)
+
 
 # ELITISM
 for gen in range(GENERATIONS):
     fitness_values = [fitness(i) for i in population]
+    print_stats(population,fitness_values)
 
     new_population = []
     for _ in range(ELITE_SIZE):
-        best_individual = max(population)
+        best_individual = max(population, key=fitness)
         idx = population.index(best_individual)
-        new_population.append(population.pop(idx))
-        fitness_values.pop(idx)
+        new_population.append(idx)
     
     for _ in range(POP_SIZE - ELITE_SIZE):
         parent1 = select_proportional(population,fitness_values)
@@ -127,4 +128,4 @@ for gen in range(GENERATIONS):
         new_population.append(child)
 
     population = new_population
-    print_stats(population,fitness_values)
+
