@@ -5,7 +5,6 @@ MAX_VELOCITY = 15
 W1 = 10
 W2 = 30
 W3 = 3
-TICKS = 50
 
 local velocities = { left = BASE_VELOCITY, right = BASE_VELOCITY}
 
