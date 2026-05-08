@@ -38,13 +38,10 @@ function controller()
     vectors.obstacle = compute_obstacle_field(robot.proximity)
     vectors.random = compute_random_field()
 
-    log("Light field -> length = " .. vectors.light.length .. " angle = ".. vectors.light.angle)
-    log("Proximity field -> length = " .. vectors.obstacle.length .. " angle = ".. vectors.obstacle.angle)
     local sum = vector.vec2_polar_sum(vectors.light, vectors.obstacle)
     sum = vector.vec2_polar_sum(sum, vectors.random)
     velocities = convert_to_linear(sum)
     velocities = limitVelocity(velocities)
-    log("left = " .. velocities.left .. " right = " .. velocities.right)
     return velocities
 end
 
